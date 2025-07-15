@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Razorpay Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    button {
+      background-color: #528FF0;
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #406fc7;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Razorpay Payment Example</h1>
+  <button id="payBtn">Pay ₹100</button>
+
+  <!-- Razorpay Checkout Script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    document.getElementById('payBtn').onclick = function () 
+      var options = {
+        key: "YOUR_TEST_KEY_HERE", // Replace with your test key ID from Razorpay Dashboard
+        amount: 10000, // Amount in paise = ₹100
+        currency: "INR",
+        name: "Your Company Name",
+        description: "Test Transaction",
+        image: "https://yourlogo.com/logo.png", // Optional
+        handler: function (response) {
+          alert("Payment successful!\nPayment ID: " + response.razorpay_payment_id);
+        },
+        prefill: {
+          name: "Test User",
+          email: "test@example.com",
+          contact: "9999999999"
+        },
+        theme: {
+          color: "#528FF0"
+        }
+      };
+
+      var rzp = new Razorpay(options);
+      rzp.open();
+    };
+  </script>
+
+</body>
+</html>
